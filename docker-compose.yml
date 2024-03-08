@@ -15,7 +15,8 @@ services:
 
   whoami:
     image: jwilder/whoami
+    container_name: test
     network_mode: bridge
     environment:
-      - VIRTUAL_HOST=text.hiqbattery.cn
+      - VIRTUAL_HOST=test.hiqbattery.cn
 
