@@ -4,6 +4,7 @@ services:
   nginx-proxy:
     image: nginxproxy/nginx-proxy
     container_name: nginx-proxy
+    network_mode: bridge
     ports:
       - "80:80"
     volumes:
@@ -15,4 +16,5 @@ services:
   whoami:
     image: jwilder/whoami
     environment:
-      - VIRTUAL_HOST=whoami.example
+      - VIRTUAL_HOST=text.hiqbattery.cn
+
