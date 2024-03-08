@@ -4,6 +4,7 @@ services:
   nginx:
     image: nginx
     container_name: nginx
+    network_mode: bridge
     ports:
       - "80:80"
     volumes:
@@ -19,7 +20,21 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
 
-  whoami:
+  npm:
+    image: 'docker.io/jc21/nginx-proxy-manager:latest'
+    environment:
+      - VIRTUAL_HOST=npm.hiqbattery.cn
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+      
+  nginx-agent:
     image: jwilder/whoami
     environment:
-      - VIRTUAL_HOST=whoami.example
+      - VIRTUAL_HOST=agent.hiqbattery.cn
+     
